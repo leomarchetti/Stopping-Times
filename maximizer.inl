@@ -4,7 +4,7 @@
 */
 
 template<typename FP>
-Maximizer<FP>::Maximizer() : minusF_(NULL){};
+Maximizer<FP>::Maximizer() : minusF_(NULL){}
 
 template<typename FP>
 Maximizer<FP>::Maximizer(boost::function<FP(FP)> minusF){

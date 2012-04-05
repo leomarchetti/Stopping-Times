@@ -7,6 +7,7 @@
 #define _DE_SOLVER_H_
 
 #include <boost/function.hpp>
+#include "de-solver.h"
 
 namespace StoppingTimes{
 
