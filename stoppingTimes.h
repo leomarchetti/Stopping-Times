@@ -8,6 +8,7 @@
 
 #include <boost/function.hpp>
 #include <boost/bind.hpp>
+#include <utility>
 #include "maximizer.h"
 #include "sde.h"
 #include "de-solver.h"
@@ -19,10 +20,11 @@ template <typename FP>
 class StoppingTimes
 {
   public:
-  	 StoppingTimes();
   	 ~StoppingTimes();
-    StoppingTimes(boost::function<FP(FP)> mu, boost::function<FP(FP)> sigma, FP rho);
-    FP getBestInferiorLimit();
+    StoppingTimes(boost::function<FP(FP)> mu, boost::function<FP(FP)> sigma);
+    std::pair<FP,FP> getBestInferiorAndSuperiorLimit(FP rho, int n);
+    FP getBestSuperiorLimit(FP rho, int n);
+    FP getBestInferiorLimit(FP rho, int n);
   
   protected:
 
@@ -31,6 +33,10 @@ class StoppingTimes
     SDE<FP> *sde_;
     DESolver<FP> solver_;
     Maximizer<FP> maximizer_;
+    boost::function<FP(FP)> A_;
+    boost::function<FP(FP)> B_;
+    FP bestExpectedGainForInferior(FP Linf);
+    FP expectedGivenInferior(FP Linf, FP Lsup);
 };
 
 #include "stoppingTimes.inl"
