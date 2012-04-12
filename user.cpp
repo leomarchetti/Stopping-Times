@@ -17,10 +17,11 @@ double sigma(double x){
 	return sqrt(2.0);
 }
 
+
 int main(){
-	StoppingTimes::StoppingTimes<double> st(mu,sigma);
-	printf("%.5f\n",st.getBestSuperiorLimit( 0.001,1000));
-	std::pair<double, double> BIS = st.getBestInferiorAndSuperiorLimit( 0.001,1000);
+	StoppingTimes::StoppingTimes<double> st(mu,sigma,[](double x){return x;});
+	printf("%.5f\n",st.getBestSuperiorLimit(0.0, 0.001,1000));
+	std::pair<double, double> BIS = st.getBestInferiorAndSuperiorLimit(0.0, 0.001,1000);
 	printf("%.5f %.5f\n",BIS.first, BIS.second);
 	return 0;
 }

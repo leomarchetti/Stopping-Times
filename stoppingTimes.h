@@ -21,10 +21,10 @@ class StoppingTimes
 {
   public:
   	 ~StoppingTimes();
-    StoppingTimes(boost::function<FP(FP)> mu, boost::function<FP(FP)> sigma);
-    std::pair<FP,FP> getBestInferiorAndSuperiorLimit(FP rho, int n);
-    FP getBestSuperiorLimit(FP rho, int n);
-    FP getBestInferiorLimit(FP rho, int n);
+    StoppingTimes(boost::function<FP(FP)> mu, boost::function<FP(FP)> sigma, boost::function<FP(FP)> g);
+    std::pair<FP,FP> getBestInferiorAndSuperiorLimit(FP x0, FP rho, int n);
+    FP getBestSuperiorLimit(FP x0, FP rho, int n);
+    FP getBestInferiorLimit(FP x0, FP rho, int n);
   
   protected:
 
@@ -35,8 +35,9 @@ class StoppingTimes
     Maximizer<FP> maximizer_;
     boost::function<FP(FP)> A_;
     boost::function<FP(FP)> B_;
-    FP bestExpectedGainForInferior(FP Linf);
-    FP expectedGivenInferior(FP Linf, FP Lsup);
+    boost::function<FP(FP)> g_;
+    FP bestExpectedGainForInferior(FP x0, FP Linf);
+    FP expectedGivenInferior(FP x0, FP Linf, FP Lsup);
 };
 
 #include "stoppingTimes.inl"
