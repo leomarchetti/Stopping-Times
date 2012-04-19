@@ -1,0 +1,5 @@
+G(x,y) = A(z)((A(x)B(y)g(x)-A(x)B(x)g(y))/(A(x)A(x)B(y)-A(x)A(y)B(x)))+B(z)((A(x)g(y)-g(x)A(y))/(A(x)B(y)-B(x)A(y)))
+
+G(x,y) = A(z)*((A(x)*B(y)*g(x)-A(x)*B(x)*g(y))/(A(x)^2*B(y)-A(x)*A(y)*B(x)))+B(z)*((A(x)*g(y)-g(x)*A(y))/(A(x)*B(y)-B(x)*A(y)))
+
+Gx(x,y) = (A[z] B[y] (-(B[y] g[x] A'[x]) + B[x] g[y] A'[x] + A[y] g[x] B'[x] - A[x] g[y] B'[x] - A[y] B[x] g'[x] + A[x] B[y] g'[x]))/(-(A[y] B[x]) + A[x] B[y])^2 + (A[y] B[z] ((-(A[y] g[x]) + A[x] g[y]) B'[x] + B[y] (g[x] A'[x] - A[x] g'[x]) + B[x] (-(g[y] A'[x]) + A[y] g'[x])))/(A[y] B[x] - A[x] B[y])^2

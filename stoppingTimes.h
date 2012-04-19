@@ -12,6 +12,8 @@
 #include "maximizer.h"
 #include "sde.h"
 #include "de-solver.h"
+#include "maximizer2D.h"
+#define EPS 1e-7
 
 namespace StoppingTimes{
 
@@ -22,10 +24,12 @@ class StoppingTimes
   public:
   	 ~StoppingTimes();
     StoppingTimes(boost::function<FP(FP)> mu, boost::function<FP(FP)> sigma, boost::function<FP(FP)> g);
-    std::pair<FP,FP> getBestInferiorAndSuperiorLimit(FP x0, FP rho, int n);
+    std::pair<FP,FP> getBestInferiorAndSuperiorLimitNew(FP x0, FP rho, int n);
+    std::pair<FP,FP> getBestInferiorAndSuperiorLimitNewNaive(FP x0, FP rho, int n);
+    std::pair<FP,FP> getBestInferiorAndSuperiorLimitOld(FP x0, FP rho, int n);
     FP getBestSuperiorLimit(FP x0, FP rho, int n);
     FP getBestInferiorLimit(FP x0, FP rho, int n);
-  
+  	 FP expectedGivenInferiorAndSuperior(FP x0, FP Linf, FP Lsup);
   protected:
 
   private:
@@ -37,7 +41,7 @@ class StoppingTimes
     boost::function<FP(FP)> B_;
     boost::function<FP(FP)> g_;
     FP bestExpectedGainForInferior(FP x0, FP Linf);
-    FP expectedGivenInferior(FP x0, FP Linf, FP Lsup);
+   
 };
 
 #include "stoppingTimes.inl"
