@@ -77,6 +77,7 @@ std::pair<FP,FP> Maximizer2D<FP>::findNearLocalMaximum(FP x, FP y){
 }
 
 
+
 template<typename FP>
 FP Maximizer2D<FP>::F(FP x, FP y){
   return -minusF_(x,y);
