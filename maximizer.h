@@ -7,6 +7,7 @@
 #define _MAXIMIZER_H_
 
 #include<boost/function.hpp>
+#include<cmath>
 
 namespace StoppingTimes{
 

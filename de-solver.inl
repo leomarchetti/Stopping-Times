@@ -26,3 +26,4 @@ FP DESolver<FP>::RungeKutta(boost::function<FP(FP, FP, FP)> ddf, FP xf, FP f0, F
     }
   return f;
 }
+

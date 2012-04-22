@@ -18,8 +18,8 @@ class SDE
   
   public:
     SDE();
-    SDE(const SDE& source);
     SDE(boost::function<FP(FP)> mu, boost::function<FP(FP)> sigma, FP rho);
+    void setRho(FP rho);
     boost::function<FP(FP, FP, FP)> getSecondDerivative();
     
   protected:
@@ -30,7 +30,7 @@ class SDE
     FP rho_;
     boost::function<FP(FP, FP, FP)> ddf_;
     FP secondDerivative(FP x, FP fx, FP dfx);
-
+    
 };
 
 #include "sde.inl"
