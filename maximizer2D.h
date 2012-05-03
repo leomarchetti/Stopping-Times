@@ -6,9 +6,11 @@
 #ifndef _MAXIMIZER2D_H_
 #define _MAXIMIZER2D_H_
 
-#include<boost/function.hpp>
-#include<cmath>
-#include <algorithm>
+#include "functor2D.h"
+#include "oppositeFunction2D.h"
+#include "directionalFunctor.h"
+#include "maximizer.h"
+#include <utility>
 
 namespace StoppingTimes{
 
@@ -17,38 +19,26 @@ template<typename FP>
 class Maximizer2D {
   
   public:
-    Maximizer2D(boost::function<FP(FP,FP)> F, 
-					 boost::function<FP(FP,FP)> Fx,
-					 boost::function<FP(FP,FP)> Fy,
-					 boost::function<FP(FP,FP)> Fxx,
-					 boost::function<FP(FP,FP)> Fxy,
-					 boost::function<FP(FP,FP)> Fyx,
-					 boost::function<FP(FP,FP)> Fyy );
-    std::pair<FP,FP> findMaximum(FP xi, FP xs, FP yi, FP ys);
-	 std::pair<FP,FP> findMaximumNaive(FP xi, FP xs, FP yi, FP ys);
+    Maximizer2D(Functor2D<FP> &F, Functor2D<FP> &Fx, Functor2D<FP> &Fy, Functor2D<FP> &Fxx, Functor2D<FP> &Fxy, Functor2D<FP> &Fyy);
+    ~Maximizer2D();
+    std::pair<FP,FP> findMaximum(FP xi, FP xf, FP yi, FP yf);
+	  std::pair<FP,FP> findMaximumNaive(FP xi, FP xf, FP yi, FP yf);
   protected:
 
   private:
-    boost::function<FP(FP,FP)> minusF_;
-    boost::function<FP(FP,FP)> minusFx_;
-    boost::function<FP(FP,FP)> minusFy_;
-    boost::function<FP(FP,FP)> minusFxx_;
-    boost::function<FP(FP,FP)> minusFxy_;
-    boost::function<FP(FP,FP)> minusFyx_;
-    boost::function<FP(FP,FP)> minusFyy_;
-    
-    FP F(FP x, FP y);
-    FP Fx(FP x, FP y);
-    FP Fy(FP x, FP y);
-    FP Fxx(FP x, FP y);
-    FP Fxy(FP x, FP y);
-    FP Fyx(FP x, FP y);
-    FP Fyy(FP x, FP y);
-    std::pair<FP,FP> findNearLocalMaximum(FP x, FP y);
+  	Functor2D<FP> *oriF_;
+  	Functor2D<FP> *F_;
+  	Functor2D<FP> *Fx_;
+  	Functor2D<FP> *Fy_;
+  	Functor2D<FP> *Fxx_;
+  	Functor2D<FP> *Fxy_;
+  	Functor2D<FP> *Fyy_;
+    std::pair<FP,FP> findNearLocalMaximum(FP x, FP y,FP xi, FP xf, FP yi, FP yf);
+    bool solve2x2a(FP a[2][2], FP b[2], FP &x, FP &y);
+    bool solve2x2b(FP a[2][2], FP b[2], FP &x, FP &y);
 };
-
+	
 #include "maximizer2D.inl"
-
 }
 
 #endif // _MAXIMIZER2D_H_
